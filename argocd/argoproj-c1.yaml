@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: capi-cluster-1
+spec:
+  destination:
+    name: ''
+    namespace: ''
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: mgmt
+    repoURL: 'http://gogs-svc.gogs.svc:18080/kagovind/capi.git'
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values-1.yaml
+  project: default

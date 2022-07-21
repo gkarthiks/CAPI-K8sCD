@@ -1,0 +1,20 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: mgmt
+networking:
+  apiServerAddress: 127.0.0.1
+  apiServerPort: 6443
+  podSubnet: "10.1.0.0/24"
+  serviceSubnet: "10.2.0.0/25"
+  kubeProxyMode: "ipvs"
+nodes:
+- role: control-plane
+  extraMounts:
+    - hostPath: /var/run/docker.sock
+      containerPath: /var/run/docker.sock
+  kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "role=capi-mgmt"

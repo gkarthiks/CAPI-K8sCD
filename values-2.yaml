@@ -1,0 +1,5 @@
+cluster:
+  name: cluster-2
+  controlNodes: 1
+  workerNodes: 2
+  k8s-version: v1.24.0
